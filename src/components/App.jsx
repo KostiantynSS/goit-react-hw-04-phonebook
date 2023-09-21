@@ -28,13 +28,15 @@ function App() {
     setContacts(contacts => contacts.filter(({ name }) => name !== data));
   };
   const contactsJson = JSON.parse(localStorage.getItem('contact'));
+
   useEffect(() => {
     if (localStorage.getItem('contact') && contactsJson.length > 0) {
       setContacts(contactsJson);
     } else {
       localStorage.setItem('contact', JSON.stringify(contacts));
     }
-  }, [contacts, contactsJson]);
+  }, []);
+
   useEffect(() => {
     localStorage.setItem('contact', JSON.stringify(contacts));
   }, [contacts]);
