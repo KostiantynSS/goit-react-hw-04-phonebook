@@ -34,7 +34,7 @@ function App() {
     } else {
       localStorage.setItem('contact', JSON.stringify(contacts));
     }
-  }, []);
+  }, [contacts, contactsJson]);
   useEffect(() => {
     localStorage.setItem('contact', JSON.stringify(contacts));
   }, [contacts]);
