@@ -4,12 +4,14 @@ import { ContactList } from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 
 function App() {
-  const [contacts, setContacts] = useState([
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ]);
+  const [contacts, setContacts] = useState(
+    JSON.parse(localStorage.getItem('contact')) ?? [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ]
+  );
   const [filter, setFilter] = useState('');
   const newContact = data => {
     const isExist = contacts.find(
@@ -27,15 +29,6 @@ function App() {
   const deleteContact = data => {
     setContacts(contacts => contacts.filter(({ name }) => name !== data));
   };
-  const contactsJson = JSON.parse(localStorage.getItem('contact'));
-
-  useEffect(() => {
-    if (localStorage.getItem('contact') && contactsJson.length > 0) {
-      setContacts(contactsJson);
-    } else {
-      localStorage.setItem('contact', JSON.stringify(contacts));
-    }
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('contact', JSON.stringify(contacts));
